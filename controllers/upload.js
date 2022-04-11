@@ -23,7 +23,7 @@ export const createProtectedImg = async (req, res, next) => {
 
     upload.save()
 
-    const token = jwt.sign({protectedUrl: upload.protectedUrl, id: upload._id, password: hashPassword}, process.env.SECRET, {expiresIn: "30min"})
+    const token = jwt.sign({protectedUrl: upload.protectedUrl, id: upload._id, password: upload.password}, process.env.SECRET, {expiresIn: "30min"})
     
     if(!upload){
       await cloudinarySet.uploader.destroy(upload.image.filename);
@@ -46,7 +46,7 @@ export const logUser = async(req, res, next)=>{
 
     if(!isPasswordMatch) return res.status(400).json({message: 'Invalid credentials'})
 
-    const token = jwt.sign({id: existingUser._id, password: existingUser.password}, process.env.SECRET, {expiresIn: "1h"})
+    const token = jwt.sign({id: existingUser._id, password: existingUser.password}, process.env.SECRET, {expiresIn: "30min"})
 
     res.status(200).json({message: 'successful', result: existingUser, token})
 
