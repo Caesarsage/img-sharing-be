@@ -17,6 +17,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req,res)=>{
+  res.send('welcome ...')
+})
 app.use('/share', router)
 
 app.all("*", (req, res, next) => {
