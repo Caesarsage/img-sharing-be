@@ -19,7 +19,7 @@ export const createProtectedImg = async (req, res, next) => {
       },
     });
     upload.id =await upload._id
-    upload.protectedUrl =await `http://localhost:4000/share/${upload.id}`
+    upload.protectedUrl =await `https://image-share-secure.herokuapp.com/share/${upload.id}`
 
     upload.save()
 
